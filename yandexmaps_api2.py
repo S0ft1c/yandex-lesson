@@ -1,6 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout
 from PyQt5.QtWebEngineWidgets import QWebEngineView
+from PyQt5.QtCore import Qt
 import requests
 
 
@@ -14,6 +15,17 @@ class MapApp(QWidget):
         self.zoom = zoom
 
         self.initUI()
+
+    def keyPressEvent(self, event):
+        print(event.key(), Qt.Key_Up)
+        if event.key() == Qt.Key_Up:
+            if self.zoom < 20:
+                self.zoom += 1
+                self.showMap()
+        elif event.key() == Qt.Key_Down:
+            if self.zoom > 1:
+                self.zoom -= 1
+                self.showMap()
 
     def initUI(self):
         self.setWindowTitle('Yandex Map App')
