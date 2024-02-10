@@ -46,18 +46,21 @@ class MapApp(QWidget):
             'document.addEventListener("keydown", function(event) { window.pywebview.api.keyPressEvent(event); });')
 
     def keyPressEvent(self, event):
+        step_size = 0.1  # Размер шага для перемещения центра карты
+        speed_factor = self.zoom / 1000  # Коэффициент скорости от зума
+
         if event.key() == Qt.Key_PageUp:
             self.zoomIn()
         elif event.key() == Qt.Key_PageDown:
             self.zoomOut()
         elif event.key() == Qt.Key_Left:
-            self.moveMap(0, -0.1)
+            self.moveMap(0, -step_size / speed_factor)
         elif event.key() == Qt.Key_Right:
-            self.moveMap(0, 0.1)
+            self.moveMap(0, step_size / speed_factor)
         elif event.key() == Qt.Key_Down:
-            self.moveMap(-0.1, 0)
+            self.moveMap(-step_size / speed_factor, 0)
         elif event.key() == Qt.Key_Up:
-            self.moveMap(0.1, 0)
+            self.moveMap(step_size / speed_factor, 0)
 
     def zoomIn(self):
         if self.zoom < 20:
