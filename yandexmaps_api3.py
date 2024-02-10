@@ -47,7 +47,7 @@ class MapApp(QWidget):
 
     def keyPressEvent(self, event):
         step_size = 0.1  # Размер шага для перемещения центра карты
-        speed_factor = self.zoom / 1000  # Коэффициент скорости от зума
+        speed_factor = self.zoom / 100  # Коэффициент скорости от зума
 
         if event.key() == Qt.Key_PageUp:
             self.zoomIn()
